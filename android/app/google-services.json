@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "200739262860",
+    "project_id": "alog-batangan",
+    "storage_bucket": "alog-batangan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200739262860:android:22d3ca1ddca16e08b186a9",
+        "android_client_info": {
+          "package_name": "com.kalog_batangan_app.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcrBG_Hf1ohRVpIdXe2mriA9zNfqJNdXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
