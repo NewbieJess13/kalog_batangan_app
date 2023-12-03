@@ -1,22 +1,48 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kalog_batangan_app/models/geometry.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-part 'earthquake_event.freezed.dart';
-part 'earthquake_event.g.dart';
-
-@freezed
-class EarthquakeEvent with _$EarthquakeEvent {
+// @freezed
+class EarthquakeEvent {
   // final String place;
 
-  const factory EarthquakeEvent(
-      {required String place,
-      required String title,
-      required double mag,
-      required int time,
-      required int updated,
-      required String type,
-      required int tsunami}) = _EarthquakeEvent;
+  final String? id;
+  final String? dateTime;
+  final String? location;
+  final String? depthOfFocus;
+  final String? origin;
+  final String? magnitude;
 
-  factory EarthquakeEvent.fromJson(Map<String, Object?> json) =>
-      _$EarthquakeEventFromJson(json);
+  EarthquakeEvent(
+      {this.id,
+      this.dateTime,
+      this.location,
+      this.depthOfFocus,
+      this.origin,
+      this.magnitude});
+
+  factory EarthquakeEvent.fromFirestore(
+      DocumentSnapshot<Map<String, dynamic>> snapshot,
+      SnapshotOptions? options) {
+    final data = snapshot.data();
+    if (data == null) {
+      return EarthquakeEvent();
+    }
+    return EarthquakeEvent(
+        id: data['id'],
+        dateTime: data['datetime'],
+        location: data['location'],
+        depthOfFocus: data['depth_of_focus'],
+        origin: data['origin'],
+        magnitude: data['magnitude']);
+  }
+
+  Map<String, dynamic> toFirestore() {
+    return {
+      if (id != null) "id": id,
+      if (dateTime != null) "datetime": dateTime,
+      if (location != null) "location": location,
+      if (depthOfFocus != null) "depth_of_focus": depthOfFocus,
+      if (origin != null) "origin": origin,
+      if (magnitude != null) "magnitude": magnitude,
+    };
+  }
 }

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "200739262860",
+    "firebase_url": "https://alog-batangan-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "alog-batangan",
     "storage_bucket": "alog-batangan.appspot.com"
   },
@@ -12,7 +13,12 @@
           "package_name": "com.kalog_batangan_app.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "200739262860-8o0n9ouqp5lrn8vmvsqn6q1bs4u6dnt7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCcrBG_Hf1ohRVpIdXe2mriA9zNfqJNdXY"
@@ -20,7 +26,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200739262860-8o0n9ouqp5lrn8vmvsqn6q1bs4u6dnt7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "200739262860-9f75ghf9j6f3o73ocg50ncugn3a2ek4d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kalogBatanganApp"
+              }
+            }
+          ]
         }
       }
     }

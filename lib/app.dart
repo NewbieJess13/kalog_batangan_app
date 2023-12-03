@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:kalog_batangan_app/screens/earthquake_map.dart';
-import 'package:kalog_batangan_app/screens/main.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kalog_batangan_app/features/login/login.dart';
+import 'package:kalog_batangan_app/features/signup/views/user_details.dart';
+import 'package:kalog_batangan_app/models/user_data.dart';
+import 'package:kalog_batangan_app/router.dart';
 
-class App extends StatelessWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(appRouterProvider);
+    return MaterialApp.router(
       theme: ThemeData(useMaterial3: true),
-      home: EarthquakeMap(),
+      routeInformationParser: router.routeInformationParser,
+      routeInformationProvider: router.routeInformationProvider,
+      routerDelegate: router.routerDelegate,
     );
   }
 }
