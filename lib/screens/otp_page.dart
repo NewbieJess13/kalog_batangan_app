@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:kalog_batangan_app/models/user_data.dart';
 import 'package:kalog_batangan_app/source/auth.dart';
 import 'package:kalog_batangan_app/widgets/primary_button.dart';
@@ -9,6 +8,10 @@ import 'package:pinput/pinput.dart';
 class OtpPage extends StatefulWidget {
   const OtpPage({super.key, this.user});
   final UserData? user;
+
+  static get routeName => 'otp_page';
+  static get routeLocation => '/otp_page';
+
   @override
   State<OtpPage> createState() => _OtpPageState();
 }
@@ -16,7 +19,7 @@ class OtpPage extends StatefulWidget {
 class _OtpPageState extends State<OtpPage> {
   @override
   void initState() {
-    test();
+    // test();
     super.initState();
   }
 
@@ -54,6 +57,10 @@ class _OtpPageState extends State<OtpPage> {
             Pinput(
               length: 6,
             ),
+            SizedBox(
+              height: 15,
+            ),
+            Text('Did not receive the code? Resend in 50 seconds'),
             Spacer(),
             PrimaryButton(
               title: 'Verify',

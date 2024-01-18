@@ -8,7 +8,7 @@ class PrimaryBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(Ionicons.chevron_back),
+      icon: const Icon(Ionicons.chevron_back),
       onPressed: () => Navigator.pop(context),
     );
   }

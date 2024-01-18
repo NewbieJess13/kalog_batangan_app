@@ -7,20 +7,20 @@ class DbFirestore {
   static final CollectionReference _eventColRef =
       _firestore.collection('events');
   static final CollectionReference _userColRef = _firestore.collection('users');
-  static Future registerEvent(EarthquakeEvent event) async {
-    try {
-      final eventDoc = await _eventColRef.doc(event.id).get();
+  // static Future registerEvent(EarthquakeEvent event) async {
+  //   try {
+  //     final eventDoc = await _eventColRef.doc(event.id).get();
 
-      if (eventDoc.exists) return;
-      final eventRef = _eventColRef
-          .withConverter(
-              fromFirestore: EarthquakeEvent.fromFirestore,
-              toFirestore: (EarthquakeEvent event, options) =>
-                  event.toFirestore())
-          .doc(event.id);
-      await eventRef.set(event);
-    } catch (e) {}
-  }
+  //     if (eventDoc.exists) return;
+  //     final eventRef = _eventColRef
+  //         .withConverter(
+  //             fromFirestore: EarthquakeEvent.fromFirestore,
+  //             toFirestore: (EarthquakeEvent event, options) =>
+  //                 event.toFirestore())
+  //         .doc(event.id);
+  //     await eventRef.set(event);
+  //   } catch (e) {}
+  // }
 
   static Future addUser(UserData user) async {
     try {

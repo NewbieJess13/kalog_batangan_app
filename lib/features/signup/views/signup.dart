@@ -7,6 +7,7 @@ import 'package:kalog_batangan_app/constants/string_const.dart';
 import 'package:kalog_batangan_app/models/user_data.dart';
 import 'package:kalog_batangan_app/providers/auth_provider.dart';
 import 'package:kalog_batangan_app/widgets/appbar.dart';
+import 'package:kalog_batangan_app/widgets/back_button.dart';
 import 'package:kalog_batangan_app/widgets/password_textfield.dart';
 import 'package:kalog_batangan_app/widgets/phone_number_input.dart';
 import 'package:kalog_batangan_app/widgets/primary_button.dart';
@@ -37,7 +38,9 @@ class SignUpPage extends ConsumerWidget {
               _ => FormzSubmissionStatus.initial
             });
     return Scaffold(
-      appBar: const MainAppBar(),
+      appBar: const MainAppBar(
+        leading: PrimaryBackButton(),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Scrollbar(

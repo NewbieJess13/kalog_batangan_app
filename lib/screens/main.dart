@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:kalog_batangan_app/features/earthquake_events/views/earthquake_event.dart';
+import 'package:kalog_batangan_app/features/evac_centers/views/evac_center_map.dart';
+import 'package:kalog_batangan_app/screens/news_feed.dart';
+import 'package:kalog_batangan_app/screens/profile.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, this.child});
@@ -22,10 +27,17 @@ class _MainPageState extends State<MainPage> {
     super.initState();
   }
 
+  List<Widget> pages = [
+    EarthquakeEventPage(),
+    EvacuationCenterMapPage(),
+    NewsFeedPage(),
+    ProfilePage()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child,
+      body: pages[_selectedIndex],
       bottomNavigationBar: _bottomNavbar(),
     );
   }
@@ -41,6 +53,27 @@ class _MainPageState extends State<MainPage> {
           fontSize: 12, fontWeight: FontWeight.w500, color: Colors.red),
       onTap: (value) {
         _selectedIndex = value;
+
+        // switch (value) {
+        //   case 0:
+        //     context.go(EarthquakeEventPage.routeLocation);
+
+        //     break;
+        //   case 1:
+        //     context.go(EvacuationCenterMapPage.routeLocation);
+
+        //     break;
+        //   case 2:
+        //     context.go(NewsFeedPage.routeLocation);
+
+        //     break;
+        //   case 3:
+        //     context.go(ProfilePage.routeLocation);
+
+        //     break;
+        //   default:
+        //     0;
+        // }
 
         setState(() {});
       },

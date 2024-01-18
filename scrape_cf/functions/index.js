@@ -9,7 +9,11 @@ firebase.initializeApp();
 var firestore = firebase.firestore();
 
 
-exports.fetchLatestPhivolcsEvent = onSchedule("*/3 * * * *", async (event) => {
+exports.fetchLatestPhivolcsEvent = onSchedule({
+    memory: "4GiB",
+    timeoutSeconds: 60,
+    schedule: "*/1 * * * *"
+}, async (event) => {
     const baseUrl = "https://earthquake.phivolcs.dost.gov.ph/";
 
     chromium.setHeadlessMode = true;
@@ -34,9 +38,13 @@ exports.fetchLatestPhivolcsEvent = onSchedule("*/3 * * * *", async (event) => {
         const expectDamage = document.querySelector("body > div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > b > span").textContent.trim();
         const expectAftershocks = document.querySelector("body > div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > b > span").textContent.trim();
 
+
+        var splitDateTime = dateTime.split("-");
         let eventMap = {
             "event_id": eventId,
-            "date_time": dateTime,
+            "date": splitDateTime[0].trim(),
+            "time": splitDateTime[1].trim(),
+            "timestamp": Date.now(),
             "location": location,
             "depth": depth,
             "origin": origin,
@@ -50,7 +58,7 @@ exports.fetchLatestPhivolcsEvent = onSchedule("*/3 * * * *", async (event) => {
     console.log(eventData);
     const eventRef = firestore.collection("events").doc(eventData["event_id"]);
     if (JSON.stringify(eventData) != "{}") {
-        if (eventData["location"].includes("BATANGAS")) {
+        if (eventData["location"].includes("Batangas")) {
             const eventSnapshot = await eventRef.get();
             if (!eventSnapshot.exists) {
                 await eventRef.set(eventData);

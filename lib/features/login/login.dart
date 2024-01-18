@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kalog_batangan_app/constants/string_const.dart';
 import 'package:kalog_batangan_app/providers/auth_provider.dart';
 import 'package:kalog_batangan_app/features/signup/views/signup.dart';
@@ -29,8 +30,8 @@ class LoginPage extends ConsumerWidget {
                         Text(next.errorMessage ?? 'Authentication Failure'),
                   ),
                 ),
-              FormzSubmissionStatus.success => Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => MainPage())),
+              FormzSubmissionStatus.success =>
+                context.go(MainPage.routeLocation),
               _ => FormzSubmissionStatus.initial
             });
 

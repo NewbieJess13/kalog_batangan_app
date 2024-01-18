@@ -8,6 +8,7 @@ class PrimaryTextField extends StatelessWidget {
   final VoidCallback? onEditingComplete;
   final TextInputType? inputType;
   final bool isRequired;
+  final String? initVal;
   const PrimaryTextField(
       {this.onChanged,
       this.validator,
@@ -16,7 +17,8 @@ class PrimaryTextField extends StatelessWidget {
       this.onEditingComplete,
       required this.label,
       super.key,
-      this.isRequired = false});
+      this.isRequired = false,
+      this.initVal});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class PrimaryTextField extends StatelessWidget {
             height: 10,
           ),
           TextFormField(
+            initialValue: initVal,
             onChanged: onChanged,
             validator: validator,
             onEditingComplete: onEditingComplete,
