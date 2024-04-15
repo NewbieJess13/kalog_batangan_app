@@ -40,6 +40,7 @@ class SignUpPage extends ConsumerWidget {
     return Scaffold(
       appBar: const MainAppBar(
         leading: PrimaryBackButton(),
+        showInfo: false,
       ),
       body: SafeArea(
         child: SingleChildScrollView(

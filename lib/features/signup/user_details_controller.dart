@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kalog_batangan_app/features/signup/entities/user_details_state.dart';
 import 'package:kalog_batangan_app/features/signup/views/signup.dart';
 import 'package:kalog_batangan_app/forms/name.dart';
@@ -81,8 +82,7 @@ class UserDetailsController extends StateNotifier<UserDetailsState> {
 
   void proceedToSignup(BuildContext context) {
     if (!state.isValid) return;
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => SignUpPage()));
+    context.push(SignUpPage.routeLocation);
 
     state = state.copyWith(status: FormzSubmissionStatus.success);
   }

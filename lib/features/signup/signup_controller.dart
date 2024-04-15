@@ -75,7 +75,8 @@ class SignupController extends StateNotifier<SignUpState> {
     try {
       String? uid = await _authenticationRepository.signup(credentials);
       if (uid != null) {
-        await _userRepository.saveUserDetails(user);
+        await _userRepository.saveUserDetails(user, uid);
+        await _userRepository.savePhoneNum(user.phoneNumber!);
       }
       state = state.copyWith(status: FormzSubmissionStatus.success);
     } on SignUpWithEmailAndPasswordFailure catch (e) {

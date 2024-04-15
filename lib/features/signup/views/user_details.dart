@@ -18,7 +18,10 @@ class UserDetailsPage extends ConsumerWidget {
     final userDetailsEvents = ref.read(userDetailsProvider.notifier);
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: const MainAppBar(),
+      appBar: const MainAppBar(
+        leading: PrimaryBackButton(),
+        showInfo: false,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

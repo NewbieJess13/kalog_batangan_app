@@ -12,19 +12,23 @@ final earthquakeEventsNotifierProvider = StateNotifierProvider.autoDispose<
 });
 
 class EarthquakeEventsController extends StateNotifier<EarthquakeEventsState> {
-  EarthquakeEventsController(this._authenticationRepository)
+  EarthquakeEventsController(this._eventRepository)
       : super(const EarthquakeEventsState.init());
 
-  final EarthquakeEventsRepository _authenticationRepository;
+  final EarthquakeEventsRepository _eventRepository;
 
   Future<void> _init() async {
     state = const EarthquakeEventsState.loading();
-    final events = await _authenticationRepository.getEvents();
+    final events = await _eventRepository.getEvents();
     // print(events);
     state = EarthquakeEventsState.data(earthquakeEvents: events);
   }
 
+  Future<void> triggerAddEvent() async {
+    await _eventRepository.addNewEarthquakeEvent();
+  }
+
   Stream<List<EarthquakeEventModel>> eventStream() {
-    return _authenticationRepository.stream();
+    return _eventRepository.stream();
   }
 }

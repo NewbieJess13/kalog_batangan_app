@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kalog_batangan_app/constants/string_const.dart';
+import 'package:kalog_batangan_app/features/signup/views/user_details.dart';
 import 'package:kalog_batangan_app/providers/auth_provider.dart';
 import 'package:kalog_batangan_app/features/signup/views/signup.dart';
 import 'package:kalog_batangan_app/screens/main.dart';
@@ -86,8 +87,7 @@ class LoginPage extends ConsumerWidget {
                   : null),
           Center(
             child: TextButton(
-                onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SignUpPage())),
+                onPressed: () => context.push(UserDetailsPage.routeLocation),
                 child: Text(StringConst.signUpText)),
           ),
           // Spacer(),

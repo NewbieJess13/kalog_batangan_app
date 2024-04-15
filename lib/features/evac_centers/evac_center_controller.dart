@@ -6,6 +6,7 @@ import 'package:kalog_batangan_app/features/evac_centers/entities/evac_center_st
 import 'package:kalog_batangan_app/global_providers.dart';
 import 'package:kalog_batangan_app/models/evac_center.dart';
 import 'package:kalog_batangan_app/repositories/evac_center.dart';
+import 'package:kalog_batangan_app/services/location_service.dart';
 
 final evacCenterStateProvider =
     StateNotifierProvider.autoDispose<EvacCenterController, EvacCenterState>(
@@ -21,7 +22,6 @@ class EvacCenterController extends StateNotifier<EvacCenterState> {
       : super(const EvacCenterState.init());
 
   final EvacCenterRepository _evacCenterRepository;
-
   late BitmapDescriptor marker;
 
   EvacCenterModel? selectedCenter;

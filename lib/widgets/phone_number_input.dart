@@ -30,6 +30,7 @@ class PhoneNumberInput extends StatelessWidget {
             height: 8,
           ),
           InternationalPhoneNumberInput(
+            initialValue: PhoneNumber(isoCode: 'PH', dialCode: "+63"),
             selectorConfig: SelectorConfig(
                 showFlags: false,
                 trailingSpace: false,

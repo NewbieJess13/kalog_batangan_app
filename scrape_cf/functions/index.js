@@ -1,12 +1,45 @@
+
+
+// const functions = require('firebase-functions');
 const { onSchedule } = require("firebase-functions/v2/scheduler");
 const firebase = require("firebase-admin");
 const puppeteer = require("puppeteer");
-
 const chromium = require("@sparticuz/chromium");
+const https = require('https');
 
 firebase.initializeApp();
 
 var firestore = firebase.firestore();
+
+let username = 'toni_13';
+let password = 'Just@Once13';
+
+
+// exports.sendEarthquakeAlert = functions.firestore.document("events/{eventId}").onCreate((event, context) => {
+//     var contacts = [];
+//     firestore.collection("numbers").get().then(snapshot => {
+//         snapshot.forEach(doc => {
+//             contacts.push(doc["phone_num"]);
+//         });
+//     });
+
+
+//     console.log(contacts);
+
+//     const snapshot = event.data;
+//     if (!snapshot) {
+//         return;
+//     }
+//     const earthquakeEvent = snapshot.data();
+
+//     var message = "An volcanic activity has been detected in Taal Volcano. Be alert for a possible intense activity in the upcoming hours";
+
+//     let postData = JSON.stringify({
+//         'to': ['+111111123', '+111111124'],
+//         'body': 'Hello World!'
+//     });
+
+// });
 
 
 exports.fetchLatestPhivolcsEvent = onSchedule({
