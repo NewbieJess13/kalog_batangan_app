@@ -20,21 +20,21 @@ class FbAuth {
     } on FirebaseAuthException catch (e) {}
   }
 
-  static Future verifyPhoneNumber(UserData user) async {
-    user = UserData(phoneNumber: '+639566683277');
-    print(user.phoneNumber);
-    try {
-      await _auth.verifyPhoneNumber(
-        phoneNumber: user.phoneNumber,
-        verificationCompleted: (cred) {},
-        verificationFailed: (authException) {},
-        codeSent: (verificationId, forceResendingToken) {},
-        codeAutoRetrievalTimeout: (verificationId) {},
-      );
-    } catch (e) {
-      print(e);
-    }
-  }
+  // static Future verifyPhoneNumber(UserData user) async {
+  //   user = UserData(phoneNumber: '+639566683277');
+  //   print(user.phoneNumber);
+  //   try {
+  //     await _auth.verifyPhoneNumber(
+  //       phoneNumber: user.phoneNumber,
+  //       verificationCompleted: (cred) {},
+  //       verificationFailed: (authException) {},
+  //       codeSent: (verificationId, forceResendingToken) {},
+  //       codeAutoRetrievalTimeout: (verificationId) {},
+  //     );
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   Future loginViaGoogle() async {}
 

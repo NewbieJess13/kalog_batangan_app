@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kalog_batangan_app/models/user_data.dart';
-import 'package:kalog_batangan_app/source/auth.dart';
 import 'package:kalog_batangan_app/widgets/primary_button.dart';
 import 'package:pinput/pinput.dart';
 
@@ -25,7 +23,7 @@ class _OtpPageState extends State<OtpPage> {
 
   Future test() async {
     if (widget.user != null) {
-      await FbAuth.verifyPhoneNumber(widget.user!);
+      // await FbAuth.verifyPhoneNumber(widget.user!);
     }
   }
 

@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kalog_batangan_app/features/evac_center_direction/views/evac_center_direction_page.dart';
 import 'package:kalog_batangan_app/features/evac_centers/evac_center_controller.dart';
-import 'package:kalog_batangan_app/models/evac_center.dart';
 import 'package:kalog_batangan_app/widgets/primary_button.dart';
 
 class EvacuationCenterMapPage extends ConsumerWidget {

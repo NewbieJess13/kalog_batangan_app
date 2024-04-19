@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {
@@ -10,7 +9,23 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('welcome'),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              'assets/icons/taal_icon.png',
+              height: 60,
+              width: 60,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Kalog Batangan',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+            )
+          ],
+        ),
       ),
     );
   }

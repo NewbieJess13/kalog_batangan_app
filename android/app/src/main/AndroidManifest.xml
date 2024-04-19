@@ -7,7 +7,7 @@
      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         tools:replace="android:label"
-        android:label="kalog_batangan_app"
+        android:label="Kalog Batangan"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -3,12 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_directions/google_maps_directions.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kalog_batangan_app/models/evac_center.dart';
-import 'package:kalog_batangan_app/services/location_service.dart';
 import 'package:kalog_batangan_app/widgets/appbar.dart';
 import 'package:kalog_batangan_app/widgets/back_button.dart';
 
@@ -35,11 +30,6 @@ class _EvacuationCenterDirectionPageState
       latitude: 13.9738767,
       longitude: 121.1663467,
       isSilent: true);
-  final _destination = WayPoint(
-      name: "Evacuation Center",
-      latitude: 13.9753797,
-      longitude: 121.1677442,
-      isSilent: false);
 
   bool _isMultipleStop = false;
   double? _distanceRemaining, _durationRemaining;
@@ -69,6 +59,8 @@ class _EvacuationCenterDirectionPageState
     _navigationOption.language = "en";
     //_navigationOption.initialLatitude = 36.1175275;
     //_navigationOption.initialLongitude = -115.1839524;
+    _navigationOption.voiceInstructionsEnabled = true;
+    _navigationOption.alternatives = true;
     MapBoxNavigation.instance.registerRouteEventListener(_onEmbeddedRouteEvent);
 
     String? platformVersion;

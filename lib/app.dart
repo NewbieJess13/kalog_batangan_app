@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kalog_batangan_app/features/login/login.dart';
-import 'package:kalog_batangan_app/features/signup/views/user_details.dart';
-import 'package:kalog_batangan_app/models/user_data.dart';
 import 'package:kalog_batangan_app/router.dart';
 
 class App extends ConsumerWidget {

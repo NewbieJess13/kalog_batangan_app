@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kalog_batangan_app/models/earthquake_event.dart';
-import 'package:kalog_batangan_app/repositories/earthquake_events.dart';
 
 class EventList extends ConsumerWidget {
   const EventList({required this.events, super.key});

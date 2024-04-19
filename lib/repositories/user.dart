@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kalog_batangan_app/global_providers.dart';
 import 'package:kalog_batangan_app/models/user_data.dart';
-import 'package:kalog_batangan_app/repositories/earthquake_events.dart';
 
 final userRepoProvider = Provider<UserRepository>((ref) {
   final service = UserRepository(ref.read(firestoreProvider));

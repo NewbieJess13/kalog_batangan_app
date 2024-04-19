@@ -2,8 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
 import 'package:kalog_batangan_app/features/profile/entities/edit_details_state.dart';
-import 'package:kalog_batangan_app/features/profile/entities/profile_state.dart';
-import 'package:kalog_batangan_app/features/signup/entities/user_details_state.dart';
 import 'package:kalog_batangan_app/forms/name.dart';
 import 'package:kalog_batangan_app/forms/normal_text.dart';
 import 'package:kalog_batangan_app/models/user_data.dart';

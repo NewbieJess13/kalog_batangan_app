@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kalog_batangan_app/widgets/appbar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

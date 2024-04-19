@@ -1,5 +1,5 @@
 name: kalog_batangan_app
-description: A new Flutter project.
+description: Kalog Batangan is a mobile app that helps Batangas residents monitor any earthquake or volcanic activity in Taal Volcano. This app provides real-time updates to its users via SMS and within the app itself.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

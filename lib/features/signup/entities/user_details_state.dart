@@ -1,10 +1,7 @@
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kalog_batangan_app/forms/confirm_password.dart';
-import 'package:kalog_batangan_app/forms/email.dart';
 import 'package:kalog_batangan_app/forms/name.dart';
 import 'package:kalog_batangan_app/forms/normal_text.dart';
-import 'package:kalog_batangan_app/forms/password.dart';
 
 part 'user_details_state.freezed.dart';
 

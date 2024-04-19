@@ -1,12 +1,10 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:kalog_batangan_app/features/earthquake_events/entities/earthquake_events_state.dart';
 import 'package:kalog_batangan_app/features/evac_centers/entities/evac_center_state.dart';
 import 'package:kalog_batangan_app/global_providers.dart';
 import 'package:kalog_batangan_app/models/evac_center.dart';
 import 'package:kalog_batangan_app/repositories/evac_center.dart';
-import 'package:kalog_batangan_app/services/location_service.dart';
 
 final evacCenterStateProvider =
     StateNotifierProvider.autoDispose<EvacCenterController, EvacCenterState>(

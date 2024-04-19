@@ -14,34 +14,6 @@ var firestore = firebase.firestore();
 let username = 'toni_13';
 let password = 'Just@Once13';
 
-
-// exports.sendEarthquakeAlert = functions.firestore.document("events/{eventId}").onCreate((event, context) => {
-//     var contacts = [];
-//     firestore.collection("numbers").get().then(snapshot => {
-//         snapshot.forEach(doc => {
-//             contacts.push(doc["phone_num"]);
-//         });
-//     });
-
-
-//     console.log(contacts);
-
-//     const snapshot = event.data;
-//     if (!snapshot) {
-//         return;
-//     }
-//     const earthquakeEvent = snapshot.data();
-
-//     var message = "An volcanic activity has been detected in Taal Volcano. Be alert for a possible intense activity in the upcoming hours";
-
-//     let postData = JSON.stringify({
-//         'to': ['+111111123', '+111111124'],
-//         'body': 'Hello World!'
-//     });
-
-// });
-
-
 exports.fetchLatestPhivolcsEvent = onSchedule({
     memory: "4GiB",
     timeoutSeconds: 60,
@@ -59,17 +31,24 @@ exports.fetchLatestPhivolcsEvent = onSchedule({
 
     await page.click("body > div > table:nth-child(4) > tbody > tr:nth-child(2) > td.auto-style91 > span.auto-style70 > a");
 
-    // test = await page.$eval("body > div > table > tbody > tr:nth-child(3) > td > div > table > tbody > tr > td:nth-child(1) > table > tbody > tr > td > span > font",el => el.)
+    var eventId;
+    var dateTime;
+    var location;
+    var depth;
+    var origin;
+    var magnitude;
+    var expectDamage;
+    var expectAftershocks;
 
     const eventData = await page.evaluate(() => {
-        const eventId = document.querySelector("body > div > table > tbody > tr:nth-child(3) > td > div > table > tbody > tr > td:nth-child(1) > table > tbody > tr > td > span > font").textContent.trim();
-        const dateTime = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > b > span").textContent.trim();
-        const location = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > b > span").textContent.trim();
-        const depth = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(3) > td:nth-child(2) > p > b > span").textContent.trim();
-        const origin = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(4) > td:nth-child(2) > p > b > span").textContent.trim();
-        const magnitude = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(5) > td:nth-child(2) > p > font > b > span").textContent.trim();
-        const expectDamage = document.querySelector("body > div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > b > span").textContent.trim();
-        const expectAftershocks = document.querySelector("body > div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > b > span").textContent.trim();
+        eventId = document.querySelector("body > div > table > tbody > tr:nth-child(3) > td > div > table > tbody > tr > td:nth-child(1) > table > tbody > tr > td > span > font").textContent.trim();
+        dateTime = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > b > span").textContent.trim();
+        location = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > b > span").textContent.trim();
+        depth = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(3) > td:nth-child(2) > p > b > span").textContent.trim();
+        origin = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(4) > td:nth-child(2) > p > b > span").textContent.trim();
+        magnitude = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(5) > td:nth-child(2) > p > font > b > span").textContent.trim();
+        expectDamage = document.querySelector("body > div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > b > span").textContent.trim();
+        expectAftershocks = document.querySelector("body > div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > b > span").textContent.trim();
 
 
         var splitDateTime = dateTime.split("-");
@@ -92,9 +71,53 @@ exports.fetchLatestPhivolcsEvent = onSchedule({
     const eventRef = firestore.collection("events").doc(eventData["event_id"]);
     if (JSON.stringify(eventData) != "{}") {
         if (eventData["location"].includes("Batangas")) {
+
             const eventSnapshot = await eventRef.get();
             if (!eventSnapshot.exists) {
                 await eventRef.set(eventData);
+            }
+            if (expectDamage == "YES") {
+                var contacts = [];
+                firestore.collection("numbers").get().then(snapshot => {
+                    snapshot.forEach(doc => {
+                        contacts.push(doc["phone_num"]);
+                    });
+                });
+                let message = `From: Kalog Batangan,\nAn earthquake has been recorded in ${location} with a magnitude of ${magnitude} today ${dateTime}.\n\nPlease be alert and contact the local PDRRMO office at (043) 786 0693, Keep safe mga Kabayan. `;
+                let messageData = JSON.stringify({
+                    'to': contacts,
+                    'body': message
+                });
+
+                let options = {
+                    hostname: 'api.bulksms.com',
+                    port: 443,
+                    path: '/v1/messages',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Content-Length': messageData.length,
+                        'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64')
+                    }
+                };
+
+                let req = https.request(options, (resp) => {
+                    console.log('statusCode:', resp.statusCode);
+                    let data = '';
+                    resp.on('data', (chunk) => {
+                        data += chunk;
+                    });
+                    resp.on('end', () => {
+                        console.log("Response:", data);
+                    });
+                });
+
+                req.on('error', (e) => {
+                    console.error(e);
+                });
+
+                req.write(messageData);
+                req.end();
             }
         }
     }
