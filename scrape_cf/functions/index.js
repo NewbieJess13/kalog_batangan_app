@@ -23,6 +23,7 @@ exports.fetchLatestPhivolcsEvent = onSchedule({
 
     chromium.setHeadlessMode = true;
 
+
     const browser = await puppeteer.launch({ args: chromium.args, headless: chromium.headless, executablePath: await chromium.executablePath() });
     const page = await browser.newPage();
 
@@ -31,27 +32,18 @@ exports.fetchLatestPhivolcsEvent = onSchedule({
 
     await page.click("body > div > table:nth-child(4) > tbody > tr:nth-child(2) > td.auto-style91 > span.auto-style70 > a");
 
-    var eventId;
-    var dateTime;
-    var location;
-    var depth;
-    var origin;
-    var magnitude;
-    var expectDamage;
-    var expectAftershocks;
 
     const eventData = await page.evaluate(() => {
-        eventId = document.querySelector("body > div > table > tbody > tr:nth-child(3) > td > div > table > tbody > tr > td:nth-child(1) > table > tbody > tr > td > span > font").textContent.trim();
-        dateTime = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > b > span").textContent.trim();
-        location = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > b > span").textContent.trim();
-        depth = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(3) > td:nth-child(2) > p > b > span").textContent.trim();
-        origin = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(4) > td:nth-child(2) > p > b > span").textContent.trim();
-        magnitude = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(5) > td:nth-child(2) > p > font > b > span").textContent.trim();
-        expectDamage = document.querySelector("body > div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > b > span").textContent.trim();
-        expectAftershocks = document.querySelector("body > div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > b > span").textContent.trim();
-
-
+        var eventId = document.querySelector("body > div > table > tbody > tr:nth-child(3) > td > div > table > tbody > tr > td:nth-child(1) > table > tbody > tr > td > span > font").textContent.trim();
+        var dateTime = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > b > span").textContent.trim();
+        var location = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > b > span").textContent.trim();
+        var depth = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(3) > td:nth-child(2) > p > b > span").textContent.trim();
+        var origin = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(4) > td:nth-child(2) > p > b > span").textContent.trim();
+        var magnitude = document.querySelector("body > div > table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(5) > td:nth-child(2) > p > font > b > span").textContent.trim();
+        var expectDamage = document.querySelector("body > div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(1) > td:nth-child(2) > p > b > span").textContent.trim();
+        var expectAftershocks = document.querySelector("body > div > table > tbody > tr:nth-child(4) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > b > span").textContent.trim();
         var splitDateTime = dateTime.split("-");
+
         let eventMap = {
             "event_id": eventId,
             "date": splitDateTime[0].trim(),
@@ -83,7 +75,7 @@ exports.fetchLatestPhivolcsEvent = onSchedule({
                         contacts.push(doc["phone_num"]);
                     });
                 });
-                let message = `From: Kalog Batangan,\nAn earthquake has been recorded in ${location} with a magnitude of ${magnitude} today ${dateTime}.\n\nPlease be alert and contact the local PDRRMO office at (043) 786 0693, Keep safe mga Kabayan. `;
+                let message = `From: Kalog Batangan,\nAn earthquake has been recorded in ${eventData["location"]} with a magnitude of ${eventData[magnitude]} today ${eventData[dateTime]}.\n\nPlease be alert and contact the local PDRRMO office at (043) 786 0693, Keep safe mga Kabayan. `;
                 let messageData = JSON.stringify({
                     'to': contacts,
                     'body': message
